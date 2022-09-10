@@ -1,0 +1,35 @@
+img{
+    border: 1px red solid;
+}
+
+h1{
+    background: black;
+}
+
+h1, h2{
+    color: gray;
+}
+
+section.s h2{
+    border: 5px green solid;
+}
+
+section.m{
+    color: pink;
+}
+
+section.m div span{
+    color: red;
+}
+
+section.m div span{
+    background-color: yellow;
+}
+
+section.w h2:hover{
+    color: green;
+}
+
+section.m h2:hover, section#tue h2:hover{
+    color: red;
+}
