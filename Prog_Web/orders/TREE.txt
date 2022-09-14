@@ -1,0 +1,74 @@
+orders
+├── HELP.md
+├── mvnw
+├── mvnw.cmd
+├── pom.xml
+├── src
+│   ├── main
+│   │   ├── java
+│   │   │   └── com
+│   │   │       └── heeere
+│   │   │           └── grouped
+│   │   │               └── orders
+│   │   │                   ├── AddTestData.java
+│   │   │                   ├── AutoPopulate.java
+│   │   │                   ├── controller
+│   │   │                   │   ├── AdminController.java
+│   │   │                   │   ├── ElasticController.java
+│   │   │                   │   ├── GlobalController.java
+│   │   │                   │   ├── ManagerController.java
+│   │   │                   │   ├── OrderingController.java
+│   │   │                   │   └── SetupController.java
+│   │   │                   ├── DemoApplication.java
+│   │   │                   ├── formdata
+│   │   │                   │   └── UserPartial.java
+│   │   │                   ├── model
+│   │   │                   │   ├── elastic
+│   │   │                   │   │   ├── ProductInfoElasticRepository.java
+│   │   │                   │   │   └── ProductInfo.java
+│   │   │                   │   ├── Order.java
+│   │   │                   │   ├── OrderSheet.java
+│   │   │                   │   ├── ProductGroup.java
+│   │   │                   │   ├── Product.java
+│   │   │                   │   ├── repos
+│   │   │                   │   │   ├── OrderRepository.java
+│   │   │                   │   │   ├── OrderSheetRepository.java
+│   │   │                   │   │   ├── ProductGroupRepository.java
+│   │   │                   │   │   ├── ProductRepository.java
+│   │   │                   │   │   └── UserGroupRepository.java
+│   │   │                   │   ├── user
+│   │   │                   │   │   ├── User.java
+│   │   │                   │   │   ├── UserRepository.java
+│   │   │                   │   │   ├── UserRole.java
+│   │   │                   │   │   └── UserService.java
+│   │   │                   │   └── UserGroup.java
+│   │   │                   └── WebSecu.java
+│   │   └── resources
+│   │       ├── application.properties
+│   │       ├── static
+│   │       │   └── css
+│   │       │       ├── base.css
+│   │       │       └── picnic.min.patched.css
+│   │       └── templates
+│   │           ├── confirm.html
+│   │           ├── fragments
+│   │           │   └── base.html
+│   │           ├── list-all.html
+│   │           ├── list-order-sheets.html
+│   │           ├── order-in-sheet.html
+│   │           ├── product-details.html
+│   │           ├── product-group-details.html
+│   │           ├── sheet-details.html
+│   │           ├── user-details.html
+│   │           └── user-group-details.html
+│   └── test
+│       └── java
+│           └── com
+│               └── heeere
+│                   └── grouped
+│                       └── orders
+│                           └── DemoApplicationTests.java
+├── target
+└── TREE.txt
+
+25 directories, 46 files

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html th:replace="~{fragments/base :: baseLayout(~{::/html/head/content()}, ~{::/html/body/content()})}">
+<head>
+    <title>Sheet detail for sheet [[ ${sh.id} ]]</title>
+    <style>
+    table td { border: 1px solid black; }
+    tr.current-user td { border: 2px solid black; border-width: 5px 1px; }
+    </style>
+</head>
+<body>
+
+        <br/>
+        <h1>Due date is [[${sh.date}]]<span data-th-class="${'archived-' + sh.archived}">archived</span></h1>
+        Current orders:
+        <table>
+            <th>
+                <td data-th-each="p : ${distinctProducts}">
+                    <span class="product-name">[[${p.name}]]</span>
+                    <span class="product-unit">([[${p.unit}]])</span>
+                    <span class="product-price">[[${p.indicativePerUnit}]]€</span>
+                </td>
+                <td>Total Approx.</td>
+            </th>
+            <tr data-th-each="u : ${orders.keySet()}" data-th-classappend="${u == currentUser} ? 'current-user'">
+                <td>
+                    [[${u.displayName}]]
+                    <input data-th-if="${u == currentUser}" type="submit" form="saveOrders" value="save"/>
+                </td>
+                <td data-th-each="p : ${distinctProducts}">
+                    <p data-th-unless="${u == currentUser}">[[${joinOrderQuantities.apply(orders.get(u).get(p), ' ')}]]</p>
+                    <p data-th-if="${u == currentUser}">
+                        <input data-th-value="${joinOrderQuantities.apply(orders.get(u).get(p), ' ')}" form="saveOrders" name="val"/>
+                        <input type="hidden" data-th-value="${p.id}" form="saveOrders" name="pid"/>
+                    </p>
+                </td>
+                <td>
+                    [[${#numbers.formatDecimal(estimatedUserBill.get(u), 0, 2)}]]
+                    <input data-th-if="${u == currentUser}" type="submit" form="saveOrders" value="save"/>
+                </td>
+            </tr>
+        </table>
+        
+        <form data-th-action="saveForUser" method="POST" id="saveOrders">
+            <input type="hidden" name="sheetId" data-th-value="${sh.id}" />
+            <input type="hidden" name="userName" data-th-value="${currentUserName}" />
+            <input type="submit" value="save"/>
+        </form>
+
+</body>
+</html>

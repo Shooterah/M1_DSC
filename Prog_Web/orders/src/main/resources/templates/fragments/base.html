@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" data-th-fragment="baseLayout(moreHeader, moreContent)">
+<!--/* This kind of comments won't appear in the generated page (thanks to the slash star) */-->
+<!--/*
+    With data-th-fragment, we kind of define a function (or a layout template) that is named baseLayout and expects two parameters.
+*/-->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <link rel="stylesheet" href="/css/picnic.min.patched.css"/>
+    <link rel="stylesheet" href="/css/base.css"/>
+
+    <data-th-block data-th-replace="${moreHeader}"> this will be replaced by any headers </data-th-block>
+    <!--/* here we insert the content passed as the first parameter moreHeader, which allows the calling templates to add a title, some style, etc */-->
+</head>
+<body>
+    <!--/* header and footer are plain HTML tags, nothing special with them */-->
+    <header>
+        <h1>
+            <a href="/manage/all" class="hide-and-seek">🦄</a>
+            <a href="/ordering">🦄</a
+            ><span class="hide-and-seek">🦄</span>
+            Shared Orders
+            <span class="hide-and-seek mirrored">🦄</span>
+            <a href="/logout" class="mirrored">🦄</a>
+            <span class="hide-and-seek mirrored">🦄</span>
+            <span class="username">([[${#authentication.name}]])</span></h1>
+    </header>
+
+    <!--/* could use data-th-insert directly on the first div, instead of nesting the second div with replace */-->
+    <div class="content">
+        <div data-th-replace="${moreContent}">
+            <!-- here we insert the content passed as the second parameter moreContent -->
+            <p>Will be replaced by the actual content</p>
+        </div>
+    </div>
+
+    <footer>
+        Demo 2019-2020
+    </footer>
+</body>
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html th:replace="~{fragments/base :: baseLayout(~{::/html/head/content()}, ~{::/html/body/content()})}">
+<head>
+    <title>Sheet detail for sheet [[ ${sh.id} ]]</title>
+    <style>
+    table td { border: 1px solid black; }
+    </style>
+</head>
+<body>
+    
+    <form data-th-action="@{${sh.id}}" method="POST" data-th-object="${sh}">
+        <input type="submit"/>
+        <input data-th-field="*{name}" autofocus/>
+        <input type="date" data-th-field="*{date}"/>
+        <input data-th-field="*{archived}" type="checkbox">
+        <label data-th-for="${#ids.prev('archived')}" class="checkable">(archived)</label>
+        <!--/* See __PICNICTHCHECKBOX__ */-->
+        <input data-th-field="*{visibleToAll}" type="checkbox">
+        <label data-th-for="${#ids.prev('visibleToAll')}" class="checkable">(visibleToAll)</label>
+
+        <br/>
+        User groups:
+        <ul>
+            <li data-th-each="ugroup : ${allUserGroups}">
+                <input type="checkbox" data-th-field="*{userGroups}" data-th-value="${ugroup.id}" />
+                <label data-th-for="${#ids.prev('userGroups')}" class="checkable">[[${ugroup.name}]] <span data-th-class="${'archived-' + ugroup.archived}">archived</span></label>
+            </li>
+        </ul>
+
+        <br/>
+        Product groups:
+        <ul>
+            <li data-th-each="pgroup : ${allProductGroups}">
+                <input type="checkbox" data-th-field="*{productGroups}" data-th-value="${pgroup.id}" />
+                <label data-th-for="${#ids.prev('productGroups')}" class="checkable">[[${pgroup.name}]] <span data-th-class="${'archived-' + pgroup.archived}">archived</span></label>
+            </li>
+        </ul>
+
+        <br/>
+        Current orders:
+        <ul>
+            <ul data-th-each="u : ${orders.keySet()}">
+                [[${u.displayName}]] ([[${u.userName}]])
+                <ul>
+                    <li data-th-each="os : ${orders.get(u).keySet()}">
+                        <ul>
+                            <li data-th-each="o : ${orders.get(u).get(os)}">
+                                [[${o.quantity}]] ([[${o.product.unit}]]) of [[${o.product.name}]]
+                            </li>
+                        </ul>
+                        
+                    </li>
+                </ul>
+            </ul>
+        </ul>
+
+
+        <br/>
+        Current orders:
+        <table>
+            <th>
+                <td data-th-each="p : ${distinctProducts}">
+                    <span class="product-name">[[${p.name}]]</span>
+                    <span class="product-unit">([[${p.unit}]])</span>
+                    <span class="product-price">[[${p.indicativePerUnit}]]€</span>
+                </td>
+                <td>Total Approx.</td>
+            </th>
+            <tr data-th-each="u : ${orders.keySet()}">
+                <td>[[${u.displayName}]] ([[${u.userName}]])</td>
+                <td data-th-each="p : ${distinctProducts}">
+                    <span data-th-each="o : ${orders.get(u).get(p)}">
+                    [[${o.quantity}]]<br/>
+                    </span>
+                </td>
+                <td>[[${#numbers.formatDecimal(estimatedUserBill.get(u), 0, 2)}]]</td>
+            </tr>
+        </table>
+
+        <hr/>
+        Export (copy paste to libreoffice):
+        <table>
+            <th>
+                <td data-th-each="p : ${distinctProducts}">
+                    <span class="product-name">[[${p.name}]]</span>
+                    <span class="product-unit">([[${p.unit}]])</span>
+                </td>
+                <td>Total Approx.</td>
+            </th>
+            <tr data-th-each="u : ${orders.keySet()}">
+                <td>[[${#strings.arraySplit(u.displayName, ' ')[0]}]]</td>
+                <td data-th-each="p : ${distinctProducts}">
+                    <span data-th-each="o : ${orders.get(u).get(p)}">
+                    [[${o.quantity}]]<br/>
+                    </span>
+                </td>
+                <td>[[${#numbers.formatDecimal(estimatedUserBill.get(u), 0, 2)}]]</td>
+            </tr>
+            <tr><td></td></tr>
+            <tr>
+                <td>Total</td>
+                <td data-th-each="p : ${distinctProducts}"></td>
+                <td>[[${#numbers.formatDecimal(#aggregates.sum(estimatedUserBill.values()), 0, 2)}]]</td>
+            </tr>
+        </table>
+        
+
+  
+        <input type="submit"/>
+      </form>
+
+</body>
+</html>

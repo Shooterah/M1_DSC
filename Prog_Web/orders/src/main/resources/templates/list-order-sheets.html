@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html th:replace="~{fragments/base :: baseLayout(~{::/html/head/content()}, ~{::/html/body/content()})}">
+<head>
+    <title>My Sheets</title>
+</head>
+<body>
+    <br/>
+    Order Sheets:
+    <div data-th-each="sh : ${sheets}">
+        <a data-th-href="@{${sh.id}}" data-th-class="${'archived-' + sh.archived}">[[ ${sh.name} ]] [[ ${sh.date} ]] <span data-th-class="${'archived-' + sh.archived}">archived</span></a>
+    </div>
+
+</body>
+</html>

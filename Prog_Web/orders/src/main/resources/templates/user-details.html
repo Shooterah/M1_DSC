@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html data-th-replace="~{fragments/base :: baseLayout(~{::/html/head/content()}, ~{::/html/body/content()})}">
+<!-- we replace the html element (so all the content) by
+     something found in the fragments/base.html file
+     which is anotated with   data-th-fragment="baseLayout(...)"
+     which expects two parameters,
+     the first one is the document fragment created from the complete content of the head in the html (here below)
+     the second is, similarly, the content of the body below.
+ -->
+<head>
+    <title>User details for user [[ ${u.userName} ]]</title>
+</head>
+<body>
+    
+    <form data-th-action="@{${u.userName}}" method="POST" data-th-object="${u}">
+        <input type="submit"/>
+        <input data-th-field="*{displayName}" autofocus/>
+        
+        <input type="submit"/>
+    </form>
+
+    <form data-th-action="@{/admin/reset-password/{un} (un = ${u.userName})}" method="POST">
+        <input name="newPassword" data-th-value="${newPassword}"/>
+        <input type="submit" value="reset password"/>
+        <textarea name="moreBody" id="moreBody" placeholder="more body content" rows="8"></textarea>
+    </form>
+    <script>
+        function fillFromLS(name, id, lsKey) {
+            id = id || name
+            lsKey = lsKey || "default-"+id
+            console.log(lsKey);
+            let e = document.querySelector('#'+id)
+            let v = localStorage.getItem(lsKey)
+            if (v !== null) {
+                e.value = v
+            }
+        }
+        fillFromLS('moreBody')
+    </script>
+    <hr/>
+
+    <!--/* see ___DATASECAUTHORIZE___ */-->
+    <a data-sec-authorize-url="/admin" data-th-href="@{/admin/delete-user/{uid}/confirm (uid = ${u.userName})}">Delete user (after confirmation)</a>
+
+    <hr/>
+    <hr/>
+    <!--/* ___PREVENTFIELDADDITION___ */-->
+    <!-- again, but safer, prevent to change the password by injection, if we don't thrust the admin... -->
+    <form data-th-action="@{SAFE}" method="POST" data-th-object="${u}">
+        <input type="submit"/>
+        <input type="hidden" data-th-field="*{userName}" />
+        <input data-th-field="*{displayName}" autofocus/>
+        <!--/* ___PREVENTFIELDADDITION___ */-->
+        <!-- This will have no effect here, but will work on first form -->
+        <!-- <input name="derivedPassword" value="broken password">  -->
+        <input type="submit"/>
+    </form>
+    
+</body>
+</html>

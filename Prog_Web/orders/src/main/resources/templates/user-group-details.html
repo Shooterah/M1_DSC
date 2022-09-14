@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html data-th-replace="~{fragments/base :: baseLayout(~{::/html/head/content()}, ~{::/html/body/content()})}">
+<!-- we replace the html element (so all the content) by
+     something found in the fragments/base.html file
+     which is anotated with   data-th-fragment="baseLayout(...)"
+     which expects two parameters,
+     the first one is the document fragment created from the complete content of the head in the html (here below)
+     the second is, similarly, the content of the body below.
+ -->
+<head>
+    <title>User group detail for group [[ ${g.id} ]]</title>
+</head>
+<body>
+    
+    <!--/* ___PATCHOBJECT___ */-->
+    <form data-th-action="@{${g.id}}" method="POST" data-th-object="${g}">
+        <input type="submit"/>
+        <!--/* ___PATCHOBJECT___ */-->
+        <input data-th-field="*{name}" autofocus/>
+        <input data-th-field="*{archived}" type="checkbox">
+        <label data-th-for="${#ids.prev('archived')}" class="checkable">(archived)</label>
+        <!--/* See __PICNICTHCHECKBOX__ */-->
+
+        <br/>
+        Users:
+        <ul>
+            <li data-th-each="u : ${allUsers}">
+                <!--/* ___PATCHOBJECT___ (list) */-->
+                <input type="checkbox" data-th-field="*{users}" data-th-value="${u.userName}" />
+                <label data-th-for="${#ids.prev('users')}" class="checkable">[[${u.displayName}]] ([[${u.userName}]])</label>
+            </li>
+        </ul>
+  
+        <input type="submit"/>
+      </form>
+
+</body>
+</html>

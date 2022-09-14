@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html th:replace="~{fragments/base :: baseLayout(~{::/html/head/content()}, ~{::/html/body/content()})}">
+<head>
+    <title>All Sheets</title>
+</head>
+<body>
+    <br/>
+    Order Sheets:
+    <div data-th-each="sh : ${sheets}">
+        <a data-th-href="@{sheet/{id} (id = ${sh.id})}" data-th-class="${'archived-' + sh.archived}">[[ ${sh.name} ]] [[ ${sh.date} ]] ([[${sh.id}]]) <span data-th-class="${'archived-' + sh.archived}">archived</span></a>
+    </div>
+    <form data-th-action="@{${'sheet/'}}" method="POST" data-th-object="${newOrderSheet}">
+        <input type="submit" value="add order sheet"/>
+        <input data-th-field="*{name}"/>
+        <input type="date" data-th-field="*{date}"/>
+    </form>
+
+    <br/>
+    Product Groups:
+    <div data-th-each="g : ${productGroups}">
+        <a data-th-href="@{product-group/{id} (id = ${g.id})}" data-th-class="${'archived-' + g.archived}">[[ ${g.name} ]] ([[${g.id}]]) ([[${g.products.size()}]]) <span data-th-class="${'archived-' + g.archived}">archived</span></a>
+    </div>
+    <form data-th-action="@{${'product-group/'}}" method="POST" data-th-object="${newProductGroup}">
+        <input type="submit" value="add product group"/>
+        <input data-th-field="*{name}"/>
+    </form>
+
+    <br/>
+    User Groups:
+    <div data-th-each="g : ${userGroups}">
+        <a data-th-href="@{user-group/{id} (id = ${g.id})}" data-th-class="${'archived-' + g.archived}">[[ ${g.name} ]] ([[${g.id}]]) ([[${g.users.size()}]]) <span data-th-class="${'archived-' + g.archived}">archived</span></a>
+    </div>
+    <form data-th-action="@{${'user-group/'}}" method="POST" data-th-object="${newUserGroup}">
+        <input type="submit" value="add user group"/>
+        <input data-th-field="*{name}"/>
+    </form>
+
+    <br/>
+    Products:
+    <div data-th-each="p : ${products}">
+        <a data-th-href="@{product/{id} (id = ${p.id})}">[[ ${p.name} ]] ([[${p.id}]])</a>
+    </div>
+    <form data-th-action="@{${'product/'}}" method="POST" data-th-object="${newProduct}">
+        <input type="submit" value="add product"/>
+        <input data-th-field="*{name}"/>
+        <input type="hidden" data-th-field="*{unit}"/>
+        <input type="hidden" data-th-field="*{indicativePerUnit}"/>
+    </form>
+
+    <!--/* ___DATATHBLOCK___ */-->
+    <!--/* data-th-block is a block that will be "unwrapped" the content will be put, without the containing data-th-block */-->
+    <!--/* ___DATASECAUTHORIZE___ */-->
+    <!--/* data-sec-authorize-url is a kind of if that checks whether the current user would have access to /admin */-->
+    <!--/* we could also have used data-sec-authorize="hasRole('ADMIN')" */-->
+    <data-th-block data-sec-authorize-url="/admin">
+        <br/>
+        Users:
+        <div data-th-each="u : ${users}">
+            <a data-th-href="@{user/{id} (id = ${u.userName})}">[[ ${u.displayName} ]] ([[${u.userName}]])</a>
+        </div>
+        <form data-th-action="@{${'user/'}}" method="POST" data-th-object="${newUser}">
+            <input type="submit" value="add user"/>
+            <input data-th-field="*{userName}"/>
+        </form>
+        <hr/>
+        <form data-th-action="@{/admin/mass-add-users}">
+            <input type="submit" value="add all user"/>
+            <textarea name="allUsers" placeholder="Display name <email@email.com>&#10;..."></textarea>
+        </form>
+    </data-th-block>
+
+</body>
+</html>

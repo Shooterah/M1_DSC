@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html th:replace="~{fragments/base :: baseLayout(~{::/html/head/content()}, ~{::/html/body/content()})}">
+<head>
+    <title>Product group detail for group [[ ${g.id} ]]</title>
+</head>
+<body>
+    
+    <form data-th-action="@{${g.id}}" method="POST" data-th-object="${g}">
+        <input type="submit"/>
+
+        <input data-th-field="*{name}" autofocus/>
+
+        <input data-th-field="*{archived}" type="checkbox">
+        <label data-th-for="${#ids.prev('archived')}" class="checkable">(archived)</label>
+        <!--/* ___PICNICTHCHECKBOX___ */-->
+        <!--/* as thymeleaf adds hidden field, picnic CSS selectors are broken (they expect the .checkable to come just after the input[checkbox]) */-->
+        <!--/* that is why picnicss is patched in this project (replacing all +.checkable by ~.checkable) */-->
+
+        <br/>
+        Users:
+        <ul>
+            <li data-th-each="p : ${allProducts}">
+                <input type="checkbox" data-th-field="*{products}" data-th-value="${p.id}" />
+                <label data-th-for="${#ids.prev('products')}" class="checkable">[[${p.name}]] ([[${p.id}]])<span data-th-class="${'archived-' + p.archived}">archived</span></label>
+            </li>
+        </ul>
+
+  
+        <input type="submit"/>
+      </form>
+
+</body>
+</html>

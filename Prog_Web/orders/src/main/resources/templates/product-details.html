@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html data-th-replace="~{fragments/base :: baseLayout(~{::/html/head/content()}, ~{::/html/body/content()})}">
+<!-- we replace the html element (so all the content) by
+     something found in the fragments/base.html file
+     which is anotated with   data-th-fragment="baseLayout(...)"
+     which expects two parameters,
+     the first one is the document fragment created from the complete content of the head in the html (here below)
+     the second is, similarly, the content of the body below.
+ -->
+<head>
+    <title>Product details for product [[ ${p.id} ]]</title>
+</head>
+<body>
+
+    <!--/* ___ELASTICSEARCH___ */-->
+    <div data-th-if="${elastic}">
+        Elasticsearch has [[${elasticSize}]] dummy documents.
+        <script>
+            async function fillMe(that) {
+                let ul = document.querySelector('#UL');
+                if (!that.value) {
+                    ul.innerHTML = "";
+                    return
+                }
+                let r = await fetch('/manage/product/ELASTICALL?q='+that.value);
+                let l = await r.json();
+                ul.innerHTML = "";
+                for (let o of l) {
+                    let li = document.createElement('li');
+                    li.onclick = function (ev) {
+                        document.querySelector(".tofill").value = o.shortName;
+                    };
+                    li.textContent = o.shortName;
+                    ul.appendChild(li);
+                }
+            }
+        </script>
+        <input oninput="fillMe(this)"/>
+        <ul id="UL" style="max-height: 200px; overflow-y: scroll;">
+        </ul>
+    </div>
+    
+    <form data-th-action="@{${p.id}}" method="POST" data-th-object="${p}">
+        <input type="submit"/>
+        <input data-th-field="*{name}" autofocus class="tofill"/>
+        <input data-th-field="*{unit}"/>
+        <input type="number" data-th-field="*{indicativePerUnit}" step="0.01"/>
+        
+        <input type="submit"/>
+    </form>
+
+    <!--/* see ___DATASECAUTHORIZE___ */-->
+    <a data-sec-authorize-url="/admin" data-th-href="@{/admin/delete-product/{pid}/confirm (pid = ${p.id})}">Delete product (after confirmation)</a>
+
+</body>
+</html>
