@@ -25,6 +25,7 @@ section.m div span{
 #mon>div>span{
     background-color: yellow;
  }
+ 
 
 section.w h2:hover{
     color: green;
@@ -33,4 +34,47 @@ section.w h2:hover{
 section.m h2:hover, section#tue h2:hover{
     color: red;
 }
+
+section:not(.s) h2{
+    color: pink;
+}
+
+li:first-of-type{
+    font-weight: bold;
+}
+
+li:first-of-type + li{
+    color: red;
+}
+
+#tue span:first-of-type{
+    color: blue;
+}
+
+#tue div:first-of-type + *{
+    font-size: 200%;
+}
+
+li:nth-child(9){
+    color: blue;
+}
+
+span:nth-of-type(2){
+    font-style: italic;
+}
+
+li:nth-of-type(5n + 3){
+    color: green;
+}
+
+img{
+    box-shadow: 5px 5px 3px black;
+    transition: box-shadow 1s, margin-left 1s;;
+}
+
+img:hover{
+    box-shadow: 15px 15px 9px black;
+}
+
+
 
