@@ -14,17 +14,17 @@ section.s h2{
     border: 5px green solid;
 }
 
-section.m{
+section.m > span{
     color: pink;
 }
 
 section.m div span{
-    color: red;
+    border: solid 1px red;
 }
 
-section.m div span{
+#mon>div>span{
     background-color: yellow;
-}
+ }
 
 section.w h2:hover{
     color: green;
@@ -33,3 +33,4 @@ section.w h2:hover{
 section.m h2:hover, section#tue h2:hover{
     color: red;
 }
+

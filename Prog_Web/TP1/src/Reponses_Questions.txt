@@ -6,3 +6,8 @@ Q30]
 Q31]
     - Its because of the div
 
+Q41]
+    - 0,0,2   ---> 0 id / 0 classe,pseudo classe,attribute  / 2 ellement
+Q42]
+    - 0,2,1
+
