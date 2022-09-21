@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[[ ${titre} ]]</title>
+</head>
+<body>
+    Bonjour [[ ${qui} ]] !
+    <ul>
+        <li data-th-each="p : ${gens}"> <!-- Fait une boucle sur la liste -->
+            <a data-th-href="@{/gens/{theid} (theid=${p.id})}">[[ ${p.id} ]] : [[ ${p.prenom} ]]</a> 
+            <a data-th-href="@{/gens/{theid}/rm (theid=${p.id})}">X</a>          <!-- Créer un lien qui vas vers la page de chaque 
+                                                                                personnes et un lien pour supprimer la personne -->
+        </li> 
+    </ul>
+    <form data-th-action="@{/gens/new}" method="POST">
+        <input type="text" name="nom" placeholder="nom...">
+        <input type="text" name="prenom" placeholder="prenom...">
+        <input type="text" name="age" placeholder="age...">
+        <input type="submit" value="ajouter">
+    </form>
+</body>
+</html>
