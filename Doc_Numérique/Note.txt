@@ -1,0 +1,74 @@
+****************************************************************************************************************************
+
+PARTIE 3 - Documents Numériques aux Données Structuré
+
+****************************************************************************************************************************
+
+________________________________________________________________________________________________________________________
+
+Doc Numérique
+	- Ensemble cohérent de contenue numérique
+
+Autres notions autour du document
+	- Doc Structuré
+	- Structure logique et physique
+	- Modèle de document
+	- Multimédia
+	- Hypermédia et web
+________________________________________________________________________________________________________________________
+
+Document non structuré 
+	- Suite de bits (ou caractères)
+	- Une début, une fin
+
+Document Structuré
+	- Une structure et des contenus
+	- Parties et sous-partie : titre, auteur, dates, chapitre, section, sous-section, citation, note...
+	- Contenus : informations, et assiciées à des parties
+________________________________________________________________________________________________________________________
+
+Structure logique d'un document
+	- Découpage logique, structuration... (Entête, auteur, logo, titre...)
+________________________________________________________________________________________________________________________
+
+Modèle de document
+	- Définition d'une structure logique type
+	- Partie éventuellement optionnelles ou répétée
+	- Éventuels contenus par défaut (texte, image...)
+
+________________________________________________________________________________________________________________________
+
+Donnée-Document
+	- Des Données dans les DB comme contenus des documents
+	- Valeur simple, valeur composé (structure)
+	- Objet complexe (champs de texte, donnée multimédia)
+	- Donnée dynamique
+________________________________________________________________________________________________________________________
+
+Extension des SGBD
+	- Des fonction orienté "document"
+		- Des structures de données de taille variable et possiblement très grand
+		- Types complexe et défini par l'utilisateur
+		- Recherche avancée sur le texte intégral
+	- Des formats d'exportations des données
+		- CSV
+		- JSON
+		- XML
+		- Attention perte des vérifications des références (clé étrangère) et de l'intérrogation SQL.
+
+________________________________________________________________________________________________________________________
+
+GED
+	- Gestion Electronique de Document
+	- Progiciel (Suite logicielle) de gestion des documents
+	- Adapté a des grandes organisation
+	- La GED et les documents sont des :
+		- Moyens de présenter des données
+		- Moyen de capturer des données
+		- Moyens de traiter des données
+________________________________________________________________________________________________________________________
+
+Complémentarité GED-SGBD
+	- Convergence des outils de GED et des SGBD
+	- Intégration des outils documentaire dans les Systèmes d'Information. La BD "Disparait"
+	- L'acces aux basesde documents et bases de données n'est plus différencié
