@@ -12,6 +12,11 @@ public class FirstController {
 
     @Inject VegetableRepository veRep;
 
+    /**
+     * 
+     * @param model
+     * @return 
+     */
     @RequestMapping(value = "/")                    // Affiche la page 'racine'
     public String simplePage(Model model){
         model.addAttribute("hi", "hellowwww");      // On ajoute au model l'attribut 'hi' et sa valeur
@@ -20,6 +25,12 @@ public class FirstController {
         return "simple";                            // On affiche la page 'simple' en envoyant tout les attributs
     }
 
+    /**
+     * 
+     * @param model
+     * @param vege
+     * @return
+     */
     @RequestMapping(value="/addvegetable", method = RequestMethod.POST) // Affiche la page 'addvegetable'
     public String addVegetable(Model model, Vegetable vege){
         veRep.save(vege);                                               // On save dans la liste le légume qu'on a reçu

@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+
 @Entity
 public class Vegetable {
 
@@ -17,11 +18,18 @@ public class Vegetable {
 
     /* ---------------------------------------------------------------------- */
 
-    public Vegetable(){ // Default Constructor
+    
+    public Vegetable() { // Default Constructor
         super();
     }
 
-    public Vegetable(String name_, String color_, double price_){ // Full Constructor
+    /**
+     * 
+     * @param name_
+     * @param color_
+     * @param price_
+     */
+    public Vegetable(String name_, String color_, double price_) { // Full Constructor
         super();
         name = name_;
         color = color_;
@@ -30,41 +38,41 @@ public class Vegetable {
 
     /* ---------------------------------------------------------------------- */
 
-    public String getName(){
+    public String getName() {
         return name;
     }
 
-    public void setName(String name_){
+    public void setName(String name_) {
         name = name_;
     }
 
     /* ---------------------------------------------------------------------- */
 
-    public String getColor(){
+    public String getColor() {
         return color;
     }
 
-    public void setColor(String color_){
+    public void setColor(String color_) {
         color = color_;
     }
 
     /* ---------------------------------------------------------------------- */
 
-    public double getPrice(){
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(double price_){
+    public void setPrice(double price_) {
         price = price_;
     }
 
     /* ---------------------------------------------------------------------- */
 
-    public long getId(){
+    public long getId() {
         return id;
     }
 
-    public void setId(long id_){
+    public void setId(long id_) {
         id = id_;
     }
 
