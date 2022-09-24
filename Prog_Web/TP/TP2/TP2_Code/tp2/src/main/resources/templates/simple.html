@@ -4,13 +4,32 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/style.css}"/>
     <title>Hello Thymeleaf</title>
 </head>
 <body>
 
     <h1>Hey Hello Thymleaf !</h1>
 
-    <p>[[${hi}]]</p> <!-- <p data-th-text="${hi}"></p> -->
+    <p>[[${hi}]]</p>    <!-- <p data-th-text="${hi}"></p>  Affiche l'attribut 'hi'-->
+
+    <ul>
+        <li data-th-each="v : ${veges.findAll()}">  <!-- On itère sur tout les légumes (Qui sont dans 
+                                                    l'attribut 'veges') donc on utilise findAll() -->
+            <a data-th-text="${v.getName()}" data-th-style="'background:' + ${v.getColor()}">
+                <!-- On affiche le nom du légume avec leurs couleurs respectives -->
+            </a>    
+        </li>
+    </ul>
+
+    <form data-th-action="@{/addvegetable}" data-th-object="${veg}" method="POST"> <!-- On indique que c'est l'attribut 
+                                                                                    'veg' qu'on envois -->
+        <input type="text" placeholder="name..." data-th-field="*{name}">           <!-- Les case pour les données du 
+                                                                                        légume -->
+        <input type="text" placeholder="color..." data-th-field="*{color}">
+        <input type="text" placeholder="price..." data-th-field="*{price}">
+        <input type="submit" value="add">
+    </form>
 
 </body>
 </html>

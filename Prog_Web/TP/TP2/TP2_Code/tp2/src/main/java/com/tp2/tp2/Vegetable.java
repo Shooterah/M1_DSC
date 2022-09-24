@@ -1,10 +1,19 @@
 package com.tp2.tp2;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+@Entity
 public class Vegetable {
 
     private String name;
     private String color;
     private double price;
+
+    @Id
+    @GeneratedValue
+    private long id; // Pour faire une JPA entity
 
     /* ---------------------------------------------------------------------- */
 
@@ -47,6 +56,16 @@ public class Vegetable {
 
     public void setPrice(double price_){
         price = price_;
+    }
+
+    /* ---------------------------------------------------------------------- */
+
+    public long getId(){
+        return id;
+    }
+
+    public void setId(long id_){
+        id = id_;
     }
 
     /* ---------------------------------------------------------------------- */

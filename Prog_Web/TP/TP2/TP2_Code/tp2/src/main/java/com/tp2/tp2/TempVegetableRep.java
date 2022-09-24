@@ -1,6 +1,9 @@
 package com.tp2.tp2;
 import java.util.ArrayList;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class TempVegetableRep implements VegetableRep {
 
     private ArrayList<Vegetable> vegeList;
@@ -8,8 +11,8 @@ public class TempVegetableRep implements VegetableRep {
     public TempVegetableRep(){
         vegeList = new ArrayList<Vegetable>();
         this.add(new Vegetable("Carotte", "Orange", 0.20));
-        this.add(new Vegetable("Courgette", "Vert", 0.50));
-        this.add(new Vegetable("Choux", "Vert", 0.80));
+        this.add(new Vegetable("Courgette", "Green", 0.50));
+        this.add(new Vegetable("Choux", "Green", 0.80));
     }
 
     @Override
