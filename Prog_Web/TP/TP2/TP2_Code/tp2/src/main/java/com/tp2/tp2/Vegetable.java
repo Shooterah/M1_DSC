@@ -13,7 +13,7 @@ public class Vegetable {
 
     @Id
     @GeneratedValue
-    private long id; // Pour faire une JPA entity
+    private long id; // Pour faire une JPA entity (Avec une clé primaire)
 
     /* ---------------------------------------------------------------------- */
 
