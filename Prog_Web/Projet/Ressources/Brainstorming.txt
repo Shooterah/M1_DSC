@@ -1,0 +1,45 @@
+CLASS User
+    - ID
+    - Pseudos
+    - Password
+    - Date Inscription
+    - List des jeux speedrun
+
+CLASS VideoGame
+    - ID
+    - Name
+    - Description
+    - Nombre de run
+
+CLASS Categorie
+    - ID
+    - Name
+    - Description
+
+CLASS Run
+    - ID
+    - IdUser
+    - IdGame
+    - IdCatégorie
+    - Date de la Run
+    - Time
+
+************************************************************
+PAGE Acceuil
+	- Menu
+	- Connexion - Deconnection - Inscription
+	- Dernières run
+	
+PAGE Profil
+	- Menu
+	- Nos infos (modifiable)
+	- Nos runs
+
+PAGE Jeux
+	- Menu
+	- Liste des Jeux
+
+PAGE D'un jeu spécifique
+	- Menu
+	- Infos du jeux
+	- Runs du jeu selon les catégories
