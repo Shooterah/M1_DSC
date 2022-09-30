@@ -1,22 +1,37 @@
 package com.gameladder.gameladder;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 
-@Entity
+@Entity @Table(name="T_Game")
 public class VideoGame {
 
     /************************************************************************************************/
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id; // L'id se créer tout seul grâce a la JPA
+    private long idGame; // L'id se créer tout seul grâce a la JPA
 
     private String name;
     private String description;
     private long nbrRun;
+
+    // Liste des jeux-vidéo auquel a joué l'utilisateur
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "T_User_Game",                        // Permet de créer la relation
+               joinColumns = @JoinColumn(name = "idGame"),      // Jeux - User dans la BDD
+               inverseJoinColumns = @JoinColumn(name = "idUser"))
+    private List<User> users = new ArrayList<>(); 
 
     /************************************************************************************************/
 
@@ -38,16 +53,17 @@ public class VideoGame {
 
     /************************************************************************************************/
 
-    public long getId() {
-        return id;
+    
+    public long getIdGame() {
+        return idGame;
     }
 
     /**
-     *
-     * @param _id
+     * 
+     * @param idGame
      */
-    public void setId(long _id) {
-        this.id = _id;
+    public void setIdGame(long idGame) {
+        this.idGame = idGame;
     }
 
     public String getName() {
@@ -86,9 +102,21 @@ public class VideoGame {
         this.nbrRun = _nbrRun;
     }
 
+    public List<User> getUsers() {
+        return users;
+    }
+
+    /**
+     * 
+     * @param users
+     */
+    public void setUsers(List<User> users) {
+        this.users = users;
+    }
+
     @Override
     public String toString() {
-        return "VideoGame [id=" + id + ", name=" + name + ", description=" + description + ", nbrRun=" + nbrRun + "]";
+        return "VideoGame [idGame=" + idGame + ", name=" + name + ", description=" + description + ", nbrRun=" + nbrRun + "]";
     }
     
 }

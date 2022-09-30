@@ -2,31 +2,42 @@ package com.gameladder.gameladder;
 
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 
-@Entity
+@Entity @Table(name = "Users")
 public class User {
 
     /************************************************************************************************/
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id; // L'id se créer tout seul grâce a la JPA
+    private long idUser; // L'id se créer tout seul grâce a la JPA
 
     private String username;
     private String password;
     private Date signIn;
-    private ArrayList<VideoGame> playedGames; // Liste des jeux-vidéo auquel a joué l'utilisateur
+    
+    // Liste des jeux-vidéo auquel a joué l'utilisateur
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "T_User_Game",                            // Permet de créer la relation
+               joinColumns = @JoinColumn(name = "idUser"),          // Jeux - User dans la BDD 
+               inverseJoinColumns = @JoinColumn(name = "idGame"))
+    private List<VideoGame> playedGames = new ArrayList<>(); 
 
     /************************************************************************************************/
 
     public User() {
         super();
-        this.playedGames = new ArrayList<VideoGame>();
         this.signIn = new java.sql.Date(System.currentTimeMillis());
     }
 
@@ -39,13 +50,12 @@ public class User {
         this.username = username;
         this.password = password;
         this.signIn = new java.sql.Date(System.currentTimeMillis());
-        this.playedGames = new ArrayList<VideoGame>();
     }
 
     /************************************************************************************************/
 
     public long getId() {
-        return id;
+        return idUser;
     }
 
     /**
@@ -53,7 +63,7 @@ public class User {
      * @param _id
      */
     public void setId(long _id) {
-        this.id = _id;
+        this.idUser = _id;
     }
 
     public String getUsername() {
@@ -92,7 +102,7 @@ public class User {
         this.signIn = _signIn;
     }
 
-    public ArrayList<VideoGame> getPlayedGames() {
+    public List<VideoGame> getPlayedGames() {
         return playedGames;
     }
 
@@ -100,13 +110,17 @@ public class User {
      * 
      * @param _playedGames
      */
-    public void setPlayedGames(ArrayList<VideoGame> _playedGames) {
+    public void setPlayedGames(List<VideoGame> _playedGames) {
         this.playedGames = _playedGames;
+    }
+
+    public void addGame(VideoGame vg){
+        this.playedGames.add(vg);
     }
 
     @Override
     public String toString() {
-        return "User [id=" + id + ", username=" + username + ", password=" + password + ", signIn=" + signIn
+        return "User [idUser=" + idUser + ", username=" + username + ", password=" + password + ", signIn=" + signIn
                 + ", playedGames=" + playedGames.toString() + "]";
     }
     

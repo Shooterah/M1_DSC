@@ -16,10 +16,15 @@ public class MyController {
 
     @RequestMapping(value = "/")
     public String homePage(Model model){
-        model.addAttribute("users", userRep);               // On met dans le model les données Utilisateurs
-        model.addAttribute("games", gameRep);               // On met dans le model les données Jeux Video
-        model.addAttribute("categorys", categoryRep);       // On met dans le model les données Category
-        model.addAttribute("runs", runRep);                 // On met dans le model les données Runs
+        
+        User Shooterah = new User("Shooterah", "Blabla");
+        VideoGame ZeldaOOT = new VideoGame("TLOZ:OOT", "Jeu bien :)");
+        Shooterah.addGame(ZeldaOOT);
+        userRep.save(Shooterah);
+        model.addAttribute("users", userRep.findAll());               // On met dans le model les données Utilisateurs
+        model.addAttribute("games", gameRep.findAll());               // On met dans le model les données Jeux Video
+        model.addAttribute("categorys", categoryRep.findAll());       // On met dans le model les données Category
+        model.addAttribute("runs", runRep.findAll());                 // On met dans le model les données Runs
         return "home";
     }
     

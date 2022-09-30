@@ -9,6 +9,14 @@
 <body>
 
     <h1>Home Page</h1>
+
+    <ul>
+        <li data-th-each="u : ${users}">
+            <a data-th-text="${u.toString()}">
+
+            </a>
+        </li>
+    </ul>
     
 </body>
 </html>
