@@ -1,10 +1,15 @@
-package com.gameladder.gameladder;
+package com.gameladder.gameladder.Controller;
 
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.gameladder.gameladder.CategoryRepository;
+import com.gameladder.gameladder.RunRepository;
+import com.gameladder.gameladder.VideoGameRepository;
+import com.gameladder.gameladder.User.UserRepository;
 
 @Controller
 public class MyController {
@@ -17,10 +22,7 @@ public class MyController {
     @RequestMapping(value = "/")
     public String homePage(Model model){
         
-        User Shooterah = new User("Shooterah", "Blabla");
-        VideoGame ZeldaOOT = new VideoGame("TLOZ:OOT", "Jeu bien :)");
-        Shooterah.addGame(ZeldaOOT);
-        userRep.save(Shooterah);
+        
         model.addAttribute("users", userRep.findAll());               // On met dans le model les données Utilisateurs
         model.addAttribute("games", gameRep.findAll());               // On met dans le model les données Jeux Video
         model.addAttribute("categorys", categoryRep.findAll());       // On met dans le model les données Category
