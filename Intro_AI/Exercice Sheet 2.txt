@@ -1,0 +1,106 @@
+*****************************************************************************************************
+EXERCICE 2
+
+(0 = dire mensonge // 1 = dire vérité pour [Brown, Jones et Smith])
+
+							(a) Yes it satisfied (Cuz 3rd line 1 1 1)
+bg	jg	sg	brown	jones	smith		(b) Brown entails Smith	 (Cuz Brown and Smith column)
+0	0	0	0	1	0           (c) Brown ant Smith commited perjury  (Cuz 1st line Brown and Smith = 0)
+0	0	1	0	1	0		(d) Jones is guilty, Brown and Smith are innocent  (Cuz last line)
+0	1	0	1	1	1		(e) 1 means the guy is telling the truth
+0	1	1	0	1	0			He should be innocent and there should be a 0 in his corresponding column on the left
+1	0	0	0	0	1		    0 means the guy lying
+1	0	1	0	1	0			He should be guilty and there should be a 1 in his corresponding column on the left
+1	1	0	1	0	1
+1	1	1	0	1	0
+
+*****************************************************************************************************
+EXERCICE 3
+________________________________________________________________________
+11 Constants
+
+[mis] == Mary is sick
+[ms] == Mary sing
+[mdj] == Mary danse with John
+[hj] == Harry is jealous
+[ls] == Lucy is sick
+[lro] == Lucy want to run outside
+[ja] == John is afraid
+[mh] == Marry is happy
+[mce] == Mary can eat
+[mdh] == Marry danse with Harry
+[jj] == John is Jealous
+________________________________________________________________________
+Propositional Logic
+
+-mis => ms ^ mdj ^ hj
+ls ^ lro => ja
+-mh => -mce
+mdj v mdh => ls
+jj v hj => ls
+-mis
+ja v hj => -mh
+ms => lro
+________________________________________________________________________
+14 Clauses
+----------------------------------------------------
+-mis => ms ^ mdj ^ hj
+	mis v (ms ^ mdj ^ hj)
+	(mis v ms) ^ (mis v mdj) ^ (mis v hj)
+	(1){mis, ms}    (2){mis, mdj}    (3){mis, hj}
+----------------------------------------------------
+ls ^ lro => ja
+	-ls v -lro v ja
+	(4){-ls, -lro, ja}
+----------------------------------------------------
+-mh => -mce
+	mh v -mce
+	(5){mh, -mce}
+----------------------------------------------------
+mdj v mdh => ls
+	(-mdj ^ -mdh) v ls
+	(ls v -mdj) ^ (ls v -mdh)
+	(6){ls, -mdj}		(7){ls, -mdh}
+----------------------------------------------------
+jj v hj => ls
+	(-jj ^ -hj) v ls
+	(ls v -jj) ^ (ls v -hj)
+	(8){ls, -jj}		(9){ls, -hj}
+----------------------------------------------------
+-mis
+	(10){-mis}
+----------------------------------------------------
+ja v hj => -mh
+	(-ja ^ -hj) v -mh
+	(-mh v -ja) ^ (-mh v -hj)
+	(11){-mh, -ja}	(12){-mh, -hj}
+----------------------------------------------------
+ms => lro
+	-ms v lro
+	(13){-ms, lro}
+________________________________________________________________________
+
+(1) {mis, ms}
+(2) {mis, mdj}
+(3) {mis, hj}
+(4) {-ls, -lro, ja}
+(5) {mh, -mce}
+(6) {ls, -mdj}		
+(7) {ls, -mdh}
+(8) {ls, -jj}		
+(9) {ls, -hj}
+(10) {-mis}
+(11) {-mh, -ja}	
+(12) {-mh, -hj}
+(13) {-ms, lro}
+(14) {-hj, mce}  (Phrase to proof)
+
+(14) + (3) == {mce, mis} (15)
+(15) + (10) == {mce} (16)
+(16) + (5) == {mh} (17)
+(17) + (12) == {-hj} (18)
+(18) + (3) == {mis} (19)
+(19) + (10) == {}   ==> Satisfiable
+
+*****************************************************************************************************
+
