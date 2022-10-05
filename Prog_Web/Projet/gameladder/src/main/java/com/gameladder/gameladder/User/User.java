@@ -24,28 +24,28 @@ import com.gameladder.gameladder.VideoGame;
 import lombok.Data;
 
 @Data
-@Entity 
+@Entity
 @Table(name = "Users") // On dis que la class User sa table dans la DB est Users
 public class User {
 
     /************************************************************************************************/
 
     @Id
-    private String userName;    // L'username sera la clé primaire de la table Users
+    private String userName; // L'username sera la clé primaire de la table Users
 
     private String derivedPassword; // MDP crypté de l'utilisateur
-    private Date signIn;            // Date d'inscription
-    
+    private Date signIn; // Date d'inscription
+
     @ElementCollection(fetch = FetchType.EAGER)
     @Enumerated(EnumType.STRING)
-    private Set<UserRole> roles = new HashSet<>();   // L'utilisateur aura un role (Pour la sécurité tout ça)
+    private Set<UserRole> roles = new HashSet<>(); // L'utilisateur aura un role (Pour la sécurité tout ça)
 
     // Liste des jeux-vidéo auquel a joué l'utilisateur
     @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "T_User_Game",                            // Permet de créer la relation
-               joinColumns = @JoinColumn(name = "userName"),          // Jeux - User dans la BDD 
-               inverseJoinColumns = @JoinColumn(name = "idGame"))
-    private List<VideoGame> playedGames = new ArrayList<>(); 
+    @JoinTable(name = "T_User_Game", // Permet de créer la relation
+            joinColumns = @JoinColumn(name = "userName"), // Jeux - User dans la BDD
+            inverseJoinColumns = @JoinColumn(name = "idGame"))
+    private List<VideoGame> playedGames = new ArrayList<>();
 
     /************************************************************************************************/
 
@@ -54,7 +54,6 @@ public class User {
         this.signIn = new java.sql.Date(System.currentTimeMillis()); // Date de maintenant
     }
 
-    
     /**
      * 
      * @param userName
@@ -62,12 +61,9 @@ public class User {
     public User(String userName) {
         this.userName = userName;
         this.roles.add(UserRole.USER); // Simple utilisateur lors de l'inscription
-        this.derivedPassword = null;   // Pas de MDP par défaut
+        this.derivedPassword = null; // Pas de MDP par défaut
         this.signIn = new java.sql.Date(System.currentTimeMillis()); // Date de maintenant
     }
-
-
-    
 
     public User(String userName, String derivedPassword, List<String> roles) {
         this.userName = userName;
@@ -77,7 +73,6 @@ public class User {
         this.signIn = new java.sql.Date(System.currentTimeMillis()); // Date de maintenant
     }
 
-
     /************************************************************************************************/
-    
+
 }
