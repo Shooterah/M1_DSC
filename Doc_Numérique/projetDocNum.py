@@ -1,4 +1,8 @@
+from multiprocessing.connection import wait
+from time import sleep
 import pdfplumber
+import json
+import requests
 
 with pdfplumber.open("C:/M1_DSC/UEP/CV.pdf") as pdf:
     page = pdf.pages[0]
@@ -53,18 +57,66 @@ def getDataTelNumber(text):
     if chercheToutNum == 1 or num14 == 1:
         ListeNuméroTypeTmp.append(numero)
 
+# fonction qui permet de récupérer l'adresse mail du CV
+
+
+def getDataMail(text):
+    mail = ""
+    for row in text.split("\n"):
+        for row2 in row.split(" "):
+            if row2.__contains__("@"):
+                mail = row2
+    return mail
+
+# Fonction qui charge tous les prénom éxistant dans une liste
+
+
+def charge_liste_prenom():
+    maListe = []
+    url = "https://raw.githubusercontent.com/ori-bibas/list-of-names/main/src/first-names.json"
+    r = requests.get(url)
+    res = json.loads(r.text)
+    res = res["firstNames"]
+    for prenom in res:
+        maListe.append(prenom)
+    return maListe
+
+# Fonction qui renvois le prénom et nom d'un texte sur une ligne a l'aide d'une liste de prénom
+
+
+def getPrenomNom(text):
+    monPrenom = ""
+    envoisNom = 0
+    for row in text.split("\n"):
+        for row2 in row.split(" "):
+            if (envoisNom) and (row2 != ""):
+                return monPrenom, row2
+            for prenom in charge_liste_prenom():
+                if prenom.upper() == row2.upper():
+                    monPrenom = prenom
+                    envoisNom = 1
+
 
 getDataCompetence(text)
 getDataTelNumber(text)
-print("Competence flo : ")
+mail = getDataMail(text)
+prenom, nom = getPrenomNom(text)
+
 print(listeCompétenceTmp)
 print(ListeNuméroTypeTmp)
+print(mail)
+print(prenom + " " + nom)
 
 listeCompétenceTmp = []
 ListeNuméroTypeTmp = []
+print('---------------------------------------------------------')
 
 getDataCompetence(text2)
 getDataTelNumber(text2)
-print("Competence jeof : ")
+mail = getDataMail(text2)
+prenom, nom = getPrenomNom(text2)
+
 print(listeCompétenceTmp)
 print(ListeNuméroTypeTmp)
+print(mail)
+print(prenom + " " + nom)

@@ -72,3 +72,15 @@ Complémentarité GED-SGBD
 	- Convergence des outils de GED et des SGBD
 	- Intégration des outils documentaire dans les Systèmes d'Information. La BD "Disparait"
 	- L'acces aux basesde documents et bases de données n'est plus différencié
+
+
+
+
+
+
+******************************************************************************************************************************************************************************************************************
+
+1) Structure logique d'un document désigne la structure (Entête, auteur, logo, titre...) d'un document
+2) Car c'est un document balisé qui peut rediriger vers d'autres documents et peux afficher des médias
+3) C'est une synthax qui permet d'ajouter plus facilement des données structuré que ce soit sur une page HTML ou un doc XML
+4) ??
