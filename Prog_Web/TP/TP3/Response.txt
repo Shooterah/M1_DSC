@@ -1,0 +1,2 @@
+Q11)
+	Dans le dossier "static" qui est dans le dossier "ressources"
