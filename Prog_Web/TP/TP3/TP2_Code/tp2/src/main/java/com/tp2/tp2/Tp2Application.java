@@ -1,13 +1,13 @@
-package com.tp3.tp3.Class;
+package com.tp2.tp2;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class Tp3Application {
+public class Tp2Application {
 
 	public static void main(String[] args) {
-		SpringApplication.run(Tp3Application.class, args);
+		SpringApplication.run(Tp2Application.class, args);
 	}
 
 }
