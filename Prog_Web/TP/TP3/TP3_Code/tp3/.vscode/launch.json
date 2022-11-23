@@ -1,0 +1,14 @@
+{
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Spring Boot-Tp3Application<tp3>",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "mainClass": "com.tp3.tp3.Class.Tp3Application",
+      "projectName": "tp3",
+      "args": "",
+      "envFile": "${workspaceFolder}/.env"
+    }
+  ]
+}
